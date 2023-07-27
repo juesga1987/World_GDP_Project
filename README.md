@@ -6,6 +6,7 @@ To develop the analysis we took a table from kaggle.com that has the GDP per cou
 # ETL process code
 
 import numpy as np
+
 import pandas as pd
 
 1. Import dataset from the storage location.
@@ -15,13 +16,17 @@ gdp = pd.read_csv(r'C:\Users\juesg\Desktop\DATA SCIENCE\Repasos Bootcampo\GDP\gd
 2. Take a look to the dataframe to understand the data types, number of null values, shape. Overall have a first impression or EDA. 
 
 gdp.info()
+
 gdp.Shape()
 
 3. First of all im gonna change the type into string to make replacements easy and fast, in order to do that i created a function that accelerates the process.
 
 def tipodato(dataframe, inicio, fin, tipo):
+
     for i in range(inicio, fin +1):
+    
         dataframe[str(i)] = dataframe[str(i)].astype(tipo)
+        
     return True
 
 tipodato(gdp, 1960, 2021, str)
@@ -29,12 +34,19 @@ tipodato(gdp, 1960, 2021, str)
 4. As you can see in the initial data, some values includes 'k' char that represents thousands. To transform those cells we will replace the 'k' to '' and then change the datatype to float and finally multiply by 1.000. In order to do accomplish the task I have created a function to automatize the process across the columns we indicate.
 
 def extraer_caracter(caracter, inicio, final):
+
     for i in range(inicio, final+1):
+    
         for ind, elemento in enumerate(gdp[str(i)]):
+        
             if str(caracter) in gdp[str(i)][ind]:
+            
                 gdp[str(i)][ind] = gdp[str(i)][ind].replace('k', '')
+                
                 gdp[str(i)][ind] = (float(gdp[str(i)][ind])* 1000)
+                
             else:
+            
                 gdp[str(i)][ind] = gdp[str(i)][ind]
 
 
