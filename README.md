@@ -55,10 +55,15 @@ extraer_caracter('k', 1960, 2021)
 5. Now with an exception on 'NaN' values i need to convert all the the data to float type.
 
 for year in gdp.columns[1:]:
+
     for ind, elemento in enumerate(gdp[str(year)]):
+    
         if elemento == 'NaN':
+        
             gdp[str(year)][ind] = (gdp[str(year)][ind])
+            
         else:
+        
             gdp[str(year)][ind] = float(gdp[str(year)][ind])
 
 6. To allow the user of the data to realize deeper analysis I will assign the to each country the continent where each one of the countries belongs. To make that we first create lists of each Continent and then using the country column we check and add the Continent in Continent column recently added. Due to the encoding format Cote d'Ivoire needs to be trated separated.
@@ -68,16 +73,22 @@ africa = ['Nigeria','Ethiopia','Egypt','Congo, Dem. Rep.','Cape Verde','Congo, R
 gdp['continent'] = ''
 
 for ind, country in enumerate(gdp['country']):
+
     for elemento in africa:
+
         if country == elemento:
+        
             gdp['continent'][ind] = 'africa'
 
 
 europa = ['Falkland Islands','Isle of Man','Faeroe Islands','Russia','Slovak Republic','Cyprus','Czech Republic','Germany','United Kingdom','France','Italy','Spain','Poland','Ukraine','Romania','Netherlands','Belgium','Sweden','Czech Republic (Czechia)','Greece','Portugal','Hungary','Belarus','Austria','Switzerland','Serbia','Bulgaria','Denmark','Slovakia','Finland','Norway','Ireland','Croatia','Moldova','Bosnia and Herzegovina','Albania','Lithuania','Slovenia','North Macedonia','Latvia','Estonia','Luxembourg','Montenegro','Malta','Iceland','Andorra','Liechtenstein','Monaco','San Marino','Holy See']
 
 for ind, country in enumerate(gdp['country']):
+
     for elemento in europa:
+    
         if country == elemento:
+        
             gdp['continent'][ind] = 'europe'
 
 samerica = ['Brazil','Colombia','Argentina','Peru','Venezuela','Chile','Ecuador','Guatemala','Bolivia','Haiti','Cuba','Dominican Republic','Honduras','Paraguay','El Salvador','Nicaragua','Costa Rica','Panama','Uruguay','Jamaica','Trinidad and Tobago','Guyana','Suriname','Belize','Guadeloupe','Bahamas','Martinique'
@@ -85,33 +96,45 @@ samerica = ['Brazil','Colombia','Argentina','Peru','Venezuela','Chile','Ecuador'
            'Saint Pierre and Miquelon','Montserrat','St. Vincent and the Grenadines','Sint Maarten (Dutch part)','Sao Tome and Principe','St. Kitts and Nevis','St. Lucia','Curaçao']
 
 for ind, country in enumerate(gdp['country']):
+
     for elemento in samerica:
+    
         if country == elemento:
+        
             gdp['continent'][ind] = 'South_central_america'
 
 namerica = ['Canada', 'United States', 'Mexico','United States Virgin Islands','Virgin Islands (U.S.)','Puerto Rico']
 
 for ind, country in enumerate(gdp['country']):
+
     for elemento in namerica:
+    
         if country == elemento:
+        
             gdp['continent'][ind] = 'North_america'
 
 oceania = ['Micronesia, Fed. Sts.','Australia','Papua New Guinea','New Zealand','Fiji','Solomon Islands','Micronesia','Vanuatu','American Samoa','Kiribati','Tonga','Marshall Islands','Palau','Nauru','Tuvalu','Samoa','French Polynesia']
 
 for ind, country in enumerate(gdp['country']):
+
     for elemento in oceania:
+    
         if country == elemento:
+        
             gdp['continent'][ind] = 'oceania'
 
 
 gdp['continent'][36] = 'africa'
 
 for ind, country in enumerate(gdp['country']):
+
     if gdp['continent'][ind] == '':
+    
             gdp['continent'][ind] = 'asia'
 
 
 7. Replacement of 'nan' with 'aaa'. That will facilitate us the calculation of the mean per continent and year to fill each one of the countrys with 'NAN' data.
+
 
 gdp.replace(np.nan,'aaa',regex=True, inplace=True)
 
@@ -119,14 +142,21 @@ gdp.replace(np.nan,'aaa',regex=True, inplace=True)
 8. Lets calculate the mean per continent per year. I created a function to calculate the mean another to insert the calculated mean and lastly with loops we use both functions to travel around each columns.
 
 def calculo_media(anio, cont):
+
     conteo = 0
+    
     gd = 0
+    
     for ind, continenta in enumerate(gdp['continent']):
+    
         if continenta == str(cont) and gdp[str(anio)][ind] != 'aaa' :
+        
          conteo += 1
 
     for ind, continenta in enumerate(gdp['continent']):
+    
         if continenta == str(cont) and gdp[str(anio)][ind] != 'aaa':
+        
             gd += gdp[str(anio)][ind]
     
     media = gd / conteo
@@ -136,8 +166,11 @@ def calculo_media(anio, cont):
 calculo_media(1960, 'South_central_america')
 
 def insertar(anio, conti):
+
    for ind, elemento in enumerate(gdp[str(anio)]):
+   
       if elemento == 'aaa' and gdp['continent'][ind] == str(conti):
+      
          gdp[str(anio)][ind] = calculo_media(anio, conti)
 
 for i in range(1960, 2021+1):
