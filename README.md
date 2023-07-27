@@ -1,2 +1,4 @@
 # World_GDP_Project
-An individual project using Python Pandas and PowerBI to analyze the GDP behavior since 1961.
+An individual project using Python Pandas and PowerBI to analyze the GDP behavior since 1961 per country and continent.
+
+
