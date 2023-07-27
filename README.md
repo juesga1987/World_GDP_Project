@@ -11,9 +11,11 @@ import pandas as pd
 
 1. Import dataset from the storage location.
 
+'''
 gdp = pd.read_csv(r'C:\Users\juesg\Desktop\DATA SCIENCE\Repasos Bootcampo\GDP\gdppercapita_us_inflation_adjusted.csv', sep = ',')
+'''
 
-2. Take a look to the dataframe to understand the data types, number of null values, shape. Overall have a first impression or EDA. 
+3. Take a look to the dataframe to understand the data types, number of null values, shape. Overall have a first impression or EDA. 
 
 gdp.info()
 
