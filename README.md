@@ -5,9 +5,12 @@ To develop the analysis we took a table from kaggle.com that has the GDP per cou
 
 # ETL process code
 
+
+```pyton
 import numpy as np
 
 import pandas as pd
+```
 
 1. Import dataset from the storage location.
 
@@ -206,16 +209,21 @@ for i in range(1960, 2021+1):
 
 9. Change all the data types into float, using the function we created.
 
-tipodato(gdp, 1960,2021,float).
+```python
+tipodato(gdp, 1960,2021,float)
+```
 
 10. Round all the numbers into 2 decimals.
-
+    
+```python
 for columna in gdp.columns[1:63]:
     for ind, elemento in enumerate(gdp[str(columna)]):
         gdp[str(columna)][ind] = round(gdp[str(columna)][ind],2)
+```
 
 11. In order to have a 'KPI' we use CAGR to calculate the average annual return per country between 1960 and 2021 and add the calculation into a new column named 'cagr'.
 
+```python
 lista = []
 
 for ind, elemento in enumerate(gdp['2021']):
@@ -225,9 +233,11 @@ for ind, elemento in enumerate(gdp['2021']):
 print(lista)
 
 gdp['cagr'] = lista
+```
 
 
 12. Dataframe is ready to being exported to a .CSV file and then using PowerBI creates a dashboard to visualize and make analysis.
 
+```python
 gdp.to_csv('gdp.csv', sep=',')
-
+```
