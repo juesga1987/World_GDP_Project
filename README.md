@@ -23,6 +23,7 @@ gdp.Shape()
 
 3. First of all im gonna change the type into string to make replacements easy and fast, in order to do that i created a function that accelerates the process.
 
+```python
 def tipodato(dataframe, inicio, fin, tipo):
 
     for i in range(inicio, fin +1):
@@ -32,9 +33,11 @@ def tipodato(dataframe, inicio, fin, tipo):
     return True
 
 tipodato(gdp, 1960, 2021, str)
+```
 
 4. As you can see in the initial data, some values includes 'k' char that represents thousands. To transform those cells we will replace the 'k' to '' and then change the datatype to float and finally multiply by 1.000. In order to do accomplish the task I have created a function to automatize the process across the columns we indicate.
 
+```python
 def extraer_caracter(caracter, inicio, final):
 
     for i in range(inicio, final+1):
@@ -53,9 +56,11 @@ def extraer_caracter(caracter, inicio, final):
 
 
 extraer_caracter('k', 1960, 2021)
+```
 
 5. Now with an exception on 'NaN' values i need to convert all the the data to float type.
 
+```python
 for year in gdp.columns[1:]:
 
     for ind, elemento in enumerate(gdp[str(year)]):
@@ -67,9 +72,11 @@ for year in gdp.columns[1:]:
         else:
         
             gdp[str(year)][ind] = float(gdp[str(year)][ind])
+```
 
 6. To allow the user of the data to realize deeper analysis I will assign the to each country the continent where each one of the countries belongs. To make that we first create lists of each Continent and then using the country column we check and add the Continent in Continent column recently added. Due to the encoding format Cote d'Ivoire needs to be trated separated.
 
+```python
 africa = ['Nigeria','Ethiopia','Egypt','Congo, Dem. Rep.','Cape Verde','Congo, Rep.','Tanzania','South Africa','Kenya','Uganda','Sudan','Algeria','Morocco','Angola','Ghana','Mozambique','Madagascar','Cote dIvoire','Cameroon','Niger','Mali','Burkina Faso','	Malawi','Zambia','Chad','Somalia','Senegal','Zimbabwe','Guinea','Rwanda','Benin','Burundi','Tunisia','South Sudan','Togo','Sierra Leone','Libya','Congo','Central African Republic','Liberia','Mauritania','Eritrea','Gambia','Botswana','Namibia','Gabon','Lesotho','Guinea-Bissau','Equatorial Guinea','Mauritius','Eswatini','Djibouti','Comoros','Cabo Verde','Sao Tome Principe','Seychelles']
 
 gdp['continent'] = ''
@@ -133,16 +140,19 @@ for ind, country in enumerate(gdp['country']):
     if gdp['continent'][ind] == '':
     
             gdp['continent'][ind] = 'asia'
-
+```
 
 7. Replacement of 'nan' with 'aaa'. That will facilitate us the calculation of the mean per continent and year to fill each one of the countrys with 'NAN' data.
 
 
+```python
 gdp.replace(np.nan,'aaa',regex=True, inplace=True)
+```
 
 
 8. Lets calculate the mean per continent per year. I created a function to calculate the mean another to insert the calculated mean and lastly with loops we use both functions to travel around each columns.
 
+```python
 def calculo_media(anio, cont):
 
     conteo = 0
@@ -192,6 +202,7 @@ for i in range(1960, 2021+1):
 
 for i in range(1960, 2021+1):
     insertar(i, 'asia')
+```
 
 9. Change all the data types into float, using the function we created.
 
