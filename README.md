@@ -18,11 +18,13 @@ import pandas as pd
 gdp = pd.read_csv(r'C:\Users\juesg\Desktop\DATA SCIENCE\Repasos Bootcampo\GDP\gdppercapita_us_inflation_adjusted.csv', sep = ',')
 ```
 
-3. Take a look to the dataframe to understand the data types, number of null values, shape. Overall have a first impression or EDA. 
+2. Take a look to the dataframe to understand the data types, number of null values, shape. Overall have a first impression or EDA. 
 
+```pyton
 gdp.info()
 
 gdp.Shape()
+```
 
 3. First of all im gonna change the type into string to make replacements easy and fast, in order to do that i created a function that accelerates the process.
 
