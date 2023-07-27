@@ -11,9 +11,9 @@ import pandas as pd
 
 1. Import dataset from the storage location.
 
-'''python
+```python
 gdp = pd.read_csv(r'C:\Users\juesg\Desktop\DATA SCIENCE\Repasos Bootcampo\GDP\gdppercapita_us_inflation_adjusted.csv', sep = ',')
-'''
+```
 
 3. Take a look to the dataframe to understand the data types, number of null values, shape. Overall have a first impression or EDA. 
 
