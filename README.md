@@ -11,7 +11,7 @@ import pandas as pd
 
 1. Import dataset from the storage location.
 
-'''
+'''python
 gdp = pd.read_csv(r'C:\Users\juesg\Desktop\DATA SCIENCE\Repasos Bootcampo\GDP\gdppercapita_us_inflation_adjusted.csv', sep = ',')
 '''
 
